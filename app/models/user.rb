@@ -12,6 +12,9 @@ class User < ApplicationRecord
                   #case_sensitive: false=大文字と小文字を区別しない
                   uniqueness: { case_sensitive: false }
   #パスワードの暗号化等，セキュリティー面の用意を効率的に準備してくれる。
-  #マイグレーション時に，passwor_digestカラムを用意することを忘れない。
+  #マイグレーション時に，password_digestカラムを用意することを忘れない。
   has_secure_password
+  
+  #userモデルは複数のmicropostモデルを所有するという意味。
+  has_many :microposts
 end
