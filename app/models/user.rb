@@ -31,6 +31,10 @@ class User < ApplicationRecord
   #:followersという関係を新しく命名。through: :reverses_of_relationship,で参照先のテーブルを指定し，source: :userでテーブルの参照先(user_id)を指定。
   has_many :followers, through: :reverses_of_relationship, source: :user
   
+  has_many:favorites
+  has_many:likes, through: :favorites, source: :micropost
+  
+  
   
   def follow(other_user)
     #selfには実行したUserが代入される
@@ -56,6 +60,23 @@ class User < ApplicationRecord
     #self.idのデータ型を合わせるために，[self.id]と配列に変換して追加している。
     Micropost.where(user_id: self.following_ids + [self.id])
   end
+  
+  #お気に入りに追加
+  def favorite(other_micropost)
+    unless self.favorites.find_by(micropost_id: other_micropost.id)
+      self.favorites.find_or_create_by(micropost_id: other_micropost.id)
+    end
+  end
 
+  #お気に入りから削除
+  def unfavorite(other_micropost)
+    favo = self.favorites.find_by(micropost_id: other_micropost.id)
+    favo.destroy if favo
+  end
+  
+  #お気に入りに追加されているかどうかの確認
+  def favorite?(micropost)
+    self.likes.include?(micropost)
+  end
 end
 

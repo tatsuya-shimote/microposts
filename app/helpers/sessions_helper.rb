@@ -1,4 +1,5 @@
 module SessionsHelper
+  
   #def current_userは以下のif文を1行で書いたもの。
   # if @current_user
   #   return @current_user
@@ -6,7 +7,6 @@ module SessionsHelper
   #   @current_user = User.find_by(id: session[:user_id])
   #   return @current_user
   # end
-    
   def current_user
     #@current_userにログインユーザーが格納されていればそのまま
     #格納されていなければUser.find_by(id: session[:user_id])でユーザを検索し格納する。

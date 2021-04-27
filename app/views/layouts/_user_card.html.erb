@@ -1,0 +1,12 @@
+<aside class="col-sm-4">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title"><%= usr.name %></h3>
+    </div>
+    <div class="card-body">
+      <img class="rounded img-fluid" src="<%= gravatar_url(usr, { size: 500 }) %>" alt="">
+    </div>
+  </div>
+  <%= render 'relationships/follow_button', user: usr %>
+</aside>
+

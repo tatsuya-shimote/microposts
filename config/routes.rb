@@ -12,13 +12,13 @@ Rails.application.routes.draw do
     member do
       get :followings
       get :followers
+      get :likes
     end
-    #userのみを継承した上でrouteingを定義。つまり全userに対する（もしくはそれを利用した）操作の準備。
-    collection do
-      get :search
-    end
+    
   end
 
-  resources :microposts, only: [:create, :destroy]
+  resources :microposts, only: [:create, :destroy] 
+  
   resources :relationships, only: [:create, :destroy]
+  resources :favorites, only:[:create, :destroy]
 end
